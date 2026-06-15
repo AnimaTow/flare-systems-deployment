@@ -11,7 +11,7 @@ volumes:
 services:
   c-chain-indexer-db:
     <<: *restart-policy
-    image: "mysql:9.5.0"
+    image: "mysql:9.5.0@sha256:57c892ddeb17e6c7dddf219914db017b2cf3e2797806a75424444b83622cc8ef"
     profiles: [fsp, ftso, fdc]
     environment:
       MYSQL_ROOT_PASSWORD: "root"
@@ -25,7 +25,7 @@ services:
 
   c-chain-indexer:
     <<: *restart-policy
-    image: ghcr.io/flare-foundation/flare-system-c-chain-indexer:v1.1.2
+    image: ghcr.io/flare-foundation/flare-system-c-chain-indexer:v1.1.2@sha256:efe9ff545c62d19ff3b64aca1654d2be79f15b49e62d46cce9d35e4ee2966d4c
     profiles: [fsp, ftso, fdc]
     environment:
       # db
@@ -45,7 +45,7 @@ services:
 
   system-client:
     <<: [*restart-policy, *stop-grace-period-policy]
-    image: ghcr.io/flare-foundation/flare-system-client:v1.0.15
+    image: ghcr.io/flare-foundation/flare-system-client:v1.0.15@sha256:b55e1430eae3082adaef7c0d9d37ba79d91b661c99956a54080412868ca44ce2
     profiles: [fsp, system-client]
     environment:
       # db
@@ -72,7 +72,7 @@ services:
 
   ftso-client:
     <<: [*restart-policy, *stop-grace-period-policy]
-    image: ghcr.io/flare-foundation/ftso-scaling:v1.0.9
+    image: ghcr.io/flare-foundation/ftso-scaling:v1.0.9@sha256:25a8942c653d3d9cc55abc277a2e76df76601af27e9921a238ac06608f51e403
     profiles: [fsp, ftso]
     environment:
       DB_HOST: "c-chain-indexer-db"
@@ -87,7 +87,7 @@ services:
 
   fdc-client:
     <<: [*restart-policy, *stop-grace-period-policy]
-    image: ghcr.io/flare-foundation/fdc-client:v1.2.10
+    image: ghcr.io/flare-foundation/fdc-client:v1.2.10@sha256:5a1eee1ff86af534c1ffb20654d9c89956f497e3f3c72c53315c2310bde0f7b8
     profiles: [fsp, fdc]
     environment:
       DB_HOST: "c-chain-indexer-db"
@@ -102,7 +102,7 @@ services:
 
   fast-updates:
     <<: *restart-policy
-    image: ghcr.io/flare-foundation/fast-updates/go-client:v1.0.2
+    image: ghcr.io/flare-foundation/fast-updates/go-client:v1.0.2@sha256:c07cda6f26e0294647225ee00e6414d843ec4765f5d32393c2e0d2acdbdaa9f7
     profiles: [fast-updates]
     environment:
       SIGNING_PRIVATE_KEY: ${SIGNING_PK}
